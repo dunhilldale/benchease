@@ -17,18 +17,19 @@ services:
       - brm
 
   db:
-    image: mariadb:10.10
+    image: postgres
     container_name: brm-db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
       SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
+      SERVICE_NAME: database
+    ports:
+      - ${DB_PORT}:${DB_PORT}
     volumes:
-      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      - ./docker-compose/database:/docker-entrypoint-initdb.d
     networks:
       - brm
 
@@ -41,6 +42,7 @@ services:
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d
+      - ./docker-compose/nginx:/etc/php.d/pdo_pgsql.ini
     networks:
       - brm
 
