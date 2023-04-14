@@ -25,17 +25,8 @@ Route::prefix('test')->group(function(){
 });
 
 Route::middleware('auth:api')->prefix('v1')->group(function(){
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+    // Route::get('/user', function (Request $request) {
+    //     return $request->user();
+    // });
     // Route::resource('accounts', 'AccountController');
-    // Route::resource('monthly-items', 'MonthlyItemController');
-    // Route::resource('daily-items', 'DailyItemController');
-    // Route::resource('daily-cost', 'DailyCostController');
-    // Route::resource('category', 'CategoryController');
-    // Route::resource('location', 'LocationController');
-    // Route::resource('group', 'GroupController');
-    // Route::resource('metrics', 'MetricsController');
-    // Route::resource('dashboardNote', 'DashboardNoteController');
-    // Route::resource('jobopenings', 'JobOpeningsController');
 });
