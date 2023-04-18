@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('shift_hours', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->timestamp('shift_start', $precision = 0);
-            $table->timestamp('shift_end', $precision = 0);
+            $table->timestamp('shift_start', $precision = 0)->default(now());
+            $table->timestamp('shift_end', $precision = 0)->default(now());
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

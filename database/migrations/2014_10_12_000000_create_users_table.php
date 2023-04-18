@@ -15,15 +15,26 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('employee_id'); // as the username to login
+            $table->string('first_name');
+            $table->string('middle_name')->nullable();
+            $table->string('last_name');
             $table->string('email')->unique();
+            $table->string('type')->default('employee');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('status')->default(true);
+
+            $table->unsignedInteger('created_by')->nullable();
+            $table->unsignedInteger('updated_by')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
         User::create([
-            'name' => 'Sample User.',
+            'employee_id' => '2022-001',
+            'first_name' => 'Sample User.',
+            'last_name' => 'Sample User.',
+            'type' => 'admin',
             'email' => 'sample@sample.com',
             'password' => Hash::make('sample'),
         ]);
