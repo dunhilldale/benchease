@@ -32,8 +32,8 @@ return new class extends Migration
         });
         User::create([
             'employee_id' => '2022-001',
-            'first_name' => 'Sample User.',
-            'last_name' => 'Sample User.',
+            'first_name' => 'Sample',
+            'last_name' => ' User',
             'type' => 'admin',
             'email' => 'sample@sample.com',
             'password' => Hash::make('sample'),
