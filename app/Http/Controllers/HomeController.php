@@ -16,6 +16,7 @@ class HomeController extends Controller
         public User $users
     )
     {
+        $this->users = new User();
         $this->middleware(['auth', 'verified']);
     }
 
