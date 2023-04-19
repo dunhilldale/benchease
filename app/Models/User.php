@@ -42,15 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function get_users(?string $type = null, ?bool $status = null) : ?array
+    public function get_users(?string $type = null, ?bool $status = null)
     {
-        $users = $this->orderBy('last_name', 'asc')
+        return $this->orderBy('last_name', 'asc')
                     ->where('type', $type)
-                    ->where('status', $status);
-        // if (isset($status)) {
-        //     $users->where('status', $status);
-        // }
-
-        return $users->get();
+                    ->where('status', $status)
+                    ->get();
     }
 }
