@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'employee_id', 'first_name', 'middle_name',
         'last_name', 'type', 'email', 'password',
+        'is_new',
     ];
 
     /**
@@ -41,8 +42,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function get_users()
+    public function get_users(?string $type = null, ?bool $status = null) : ?array
     {
-        return $this->get();
+        $users = $this->orderBy('last_name', 'asc')
+                    ->where('type', $type)
+                    ->where('status', $status);
+        // if (isset($status)) {
+        //     $users->where('status', $status);
+        // }
+
+        return $users->get();
     }
 }

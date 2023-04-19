@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\UsersResource;
 
 class UserController extends Controller
 {
@@ -12,7 +13,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return response(
+        [
+            'result' => UsersResource::collection(User::all()), 
+            'message' => 'Successful'
+        ], 200);
+        // return UsersResource::collection(User::all());
     }
 
     /**
@@ -28,7 +34,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return response(
+        [
+            'result' => new UsersResource($user), 
+            'message' => 'Successful'
+        ], 200);
+        // return new UsersResource($user);
     }
 
     /**

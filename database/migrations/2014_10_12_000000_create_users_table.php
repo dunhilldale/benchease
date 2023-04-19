@@ -24,6 +24,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('status')->default(true);
+            $table->boolean('is_new')->default(true);
 
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
@@ -32,10 +33,29 @@ return new class extends Migration
         });
         User::create([
             'employee_id' => '2022-001',
-            'first_name' => 'Sample',
-            'last_name' => ' User',
+            'first_name' => 'Admin',
+            'last_name' => ' Admin',
             'type' => 'admin',
-            'email' => 'sample@sample.com',
+            'is_new' => false,
+            'email' => 'admin@sample.com',
+            'password' => Hash::make('sample'),
+        ]);
+        User::create([
+            'employee_id' => '2022-002',
+            'first_name' => 'Sample',
+            'last_name' => ' HR',
+            'type' => 'hr',
+            'is_new' => false,
+            'email' => 'hr@sample.com',
+            'password' => Hash::make('sample'),
+        ]);
+        User::create([
+            'employee_id' => '2022-003',
+            'first_name' => 'Sample',
+            'last_name' => ' Employee',
+            'type' => 'employee',
+            'is_new' => true,
+            'email' => 'employee@sample.com',
             'password' => Hash::make('sample'),
         ]);
     }

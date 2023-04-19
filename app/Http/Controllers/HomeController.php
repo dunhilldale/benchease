@@ -43,7 +43,7 @@ class HomeController extends Controller
 
     public function users(Request $request)
     {
-        $users = $this->users->get_users();
+        $users = $this->users->get_users( type: 'employee', status: true );
         // dd($users);
         return view('users', compact('users'));
     }
