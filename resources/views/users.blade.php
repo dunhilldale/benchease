@@ -10,7 +10,6 @@
                     <div class="card-body">
 
                         <div class="list-group-flush">
-                            {{--   --}}
                             @php
                                 $count = 1;
                             @endphp
