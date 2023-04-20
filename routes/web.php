@@ -20,11 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 Route::get('home/clients', [HomeController::class, 'clients'])->name('home.clients');
 Route::get('home/users', [HomeController::class, 'users'])->name('home.users');
 Route::get('home/users/{user}/clients', [HomeController::class, 'user_clients'])->name('home.user.clients');

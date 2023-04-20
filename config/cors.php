@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['localhost', 'localhost:8180', 'dunhilldale.com'],
 
     'allowed_origins_patterns' => [],
 
