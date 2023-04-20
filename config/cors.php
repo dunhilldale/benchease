@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['localhost', 'localhost:8180', 'dunhilldale.com'],
+    'allowed_origins' => ['127.0.0.1', '127.0.0.1:8180', 'dunhilldale.com'],
 
     'allowed_origins_patterns' => [],
 
