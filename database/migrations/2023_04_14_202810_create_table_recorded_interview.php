@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('recorded_interview', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->uuid('user_id')->nullable();
             $table->string('title');
             $table->string('link');
             $table->timestamps();

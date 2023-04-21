@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_jobs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->uuid('user_id')->nullable();
             $table->string('title');
             $table->text('description');
             $table->date('start_date');

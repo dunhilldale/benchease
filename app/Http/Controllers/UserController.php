@@ -3,14 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Resources\UsersResource;
+use App\Http\Requests\StoreUsersRequest;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['store']]);
+    }
+
     public function index()
     {
         return response(
@@ -21,17 +29,40 @@ class UserController extends Controller
         // return UsersResource::collection(User::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreUsersRequest $request)
     {
-        return $request;
+        $request->merge(array('created_by' => 1));
+        $request['password'] = Hash::make($request->password);
+        $user = User::create($request->all());
+
+        // $request->request->add([
+        //     'grant_type'    => 'password',
+        //     'username'      => $user->email,
+        //     'password'      => $user->password,
+        //     'scope'         => '*',
+        // ]); 
+
+        $token = Request::create(
+            'api/v1/auth/token',
+            'POST',
+            [
+                'grant_type'    => 'password',
+                'username'      => $user->email,
+                'password'      => $user->password,
+                // 'scope'         => 'get_user_info',
+            ]
+        );
+
+        // return response(
+        // [
+        //     'result' => new UsersResource($user),
+        //     'message' => 'User account has been created!'
+        // ], 200);
+
+        return Route::dispatch($token);
+        
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(User $user)
     {
         return response(
@@ -42,17 +73,11 @@ class UserController extends Controller
         // return new UsersResource($user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, User $user)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(User $user)
     {
         //

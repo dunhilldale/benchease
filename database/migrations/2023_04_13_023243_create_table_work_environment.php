@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('work_environment', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->uuid('user_id')->nullable();
             $table->string('title');
             $table->timestamps();
 

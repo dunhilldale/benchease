@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('shift_days', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->uuid('user_id')->nullable();
             $table->string('days');
             $table->timestamps();
 
