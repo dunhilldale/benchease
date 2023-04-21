@@ -27,9 +27,6 @@ RUN npm install npm@latest -g && \
     npm install n -g && \
     n latest
 
-# Adding Frontend Global dependency
-RUN npm install -g @vue/cli
-
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
