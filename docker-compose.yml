@@ -1,9 +1,9 @@
-version: "3.7"
+version: "3.9"
 services:
   app:
     build:
       args:
-        user: talentloop
+        user: brm_user
         uid: 1000
       context: ./
       dockerfile: Dockerfile

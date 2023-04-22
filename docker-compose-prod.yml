@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile.prod
+    image: brm
+    container_name: brm-app
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www
+    networks:
+      - brm
+
+networks:
+  brm:
+    external: true
