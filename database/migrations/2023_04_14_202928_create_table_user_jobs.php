@@ -18,9 +18,14 @@ return new class extends Migration
             $table->text('description');
             $table->date('start_date');
             $table->date('end_date');
-            $table->timestamps();
 
+            $table->uuid('created_by')->nullable();
+            $table->uuid('updated_by')->nullable();
+            $table->timestamps();
+           
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 

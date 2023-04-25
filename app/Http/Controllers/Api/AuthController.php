@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
 
     public function __construct(
-        protected object $client = new Client()
+        protected Client $client = new Client()
     )
     {
     }

@@ -15,6 +15,29 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <hr>
+
+                    @foreach ($grants as $grant)
+                        <table class="table table-hover">
+                            <tr>
+                                <th colspan="2">{{ $grant->name }}</th>
+                            </tr>
+                            <tr>
+                                <th>Client ID</th>
+                                <td>{{ $grant->id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Client Secret</th>
+                                <td>{{ $grant->secret }}</td>
+                            </tr>
+                        </table>
+                        <br>
+                    @endforeach
+
+                </div>
+
+                <div class="card-footer">
+                    ID: {{ Auth::user()->id }}
                 </div>
             </div>
         </div>

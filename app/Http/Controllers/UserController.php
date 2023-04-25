@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 
+use App\Exceptions\ClientException;
+
 class UserController extends Controller
 {
 
@@ -21,12 +23,13 @@ class UserController extends Controller
 
     public function index()
     {
+        parent::check_user_access();
+
         return response(
         [
             'result' => UsersResource::collection(User::all()), 
             'message' => 'Successful'
         ], 200);
-        // return UsersResource::collection(User::all());
     }
 
     public function store(StoreUsersRequest $request)
@@ -34,13 +37,6 @@ class UserController extends Controller
         $request->merge(array('created_by' => 1));
         $request['password'] = Hash::make($request->password);
         $user = User::create($request->all());
-
-        // $request->request->add([
-        //     'grant_type'    => 'password',
-        //     'username'      => $user->email,
-        //     'password'      => $user->password,
-        //     'scope'         => '*',
-        // ]); 
 
         $token = Request::create(
             'api/v1/auth/token',
@@ -53,18 +49,14 @@ class UserController extends Controller
             ]
         );
 
-        // return response(
-        // [
-        //     'result' => new UsersResource($user),
-        //     'message' => 'User account has been created!'
-        // ], 200);
-
         return Route::dispatch($token);
         
     }
 
     public function show(User $user)
     {
+        parent::check_user_access($user);
+
         return response(
         [
             'result' => new UsersResource($user), 

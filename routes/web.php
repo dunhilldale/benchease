@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
-
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------

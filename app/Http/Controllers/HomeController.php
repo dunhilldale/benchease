@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Client;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,8 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct(
-        public User $users
+        public User $users,
+        protected Client $client = new Client()
     )
     {
         $this->users = new User();
@@ -27,6 +30,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->type === User::TYPE_ADMIN) {
+            $grants = [
+                'personal_access' => $this->client->get_personal_access_client()->first(),
+                'password_grant' => $this->client->get_password_grant_client()->first(),
+            ];              
+            return view('home', compact('grants'));
+        }
+
         return view('home');
     }
 

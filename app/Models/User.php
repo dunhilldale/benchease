@@ -13,6 +13,10 @@ class User extends Authenticatable
 {
     use UUID, HasApiTokens, HasFactory, Notifiable;
 
+    public final const TYPE_ADMIN = "admin";
+    public final const TYPE_HR = "hr";
+    public final const TYPE_EMPLOYEE = "employee";
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'employee_id', 'first_name', 'middle_name',
         'last_name', 'type', 'email', 'password',
-        'is_new',
+        'is_new', 'created_by', 'updated_by',
     ];
 
     /**
@@ -40,6 +44,8 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'id' => 'string',
+        'employee_id' => 'string',
         'email_verified_at' => 'datetime',
     ];
 
