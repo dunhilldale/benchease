@@ -14,7 +14,39 @@ class Controller extends BaseController
     
     public static function check_user_access(?User $activeRecord = null)
     {
-        $user = Auth::user()->type;
-        return;
+        $user = Auth::user();
+
+        if ($activeRecord) {
+
+            // admin trying to open hr/employee/own account = 200
+            // hr tryin to open employee/own account = 200
+            // employee trying to own = 200
+            if (
+                ($user->id === $activeRecord->id) || 
+                ($user->type === User::TYPE_ADMIN) || 
+                ($user->type === User::TYPE_HR && $activeRecord->type === User::TYPE_EMPLOYEE) 
+                ) 
+            {
+                return true;
+            }
+
+            // hr trying to open admin = 403
+            // employee trying to open other types = 403
+            if (
+                ($user->type === User::TYPE_HR && $activeRecord->type === User::TYPE_ADMIN) || 
+                ($user->type === User::TYPE_EMPLOYEE && $user->id !== $activeRecord->id)
+                ) 
+            {
+                return false;
+                // return response(['result' => [], 'message' => "You are not authorized to perform this request."], 403);
+            }
+
+        } else {
+            if ($user->type !== User::TYPE_ADMIN) {
+                return false;
+                // return response(['result' => [], 'message' => "You are not authorized to perform this request."], 403);
+            }
+        }
+
     }
 }

@@ -23,7 +23,9 @@ class UserController extends Controller
 
     public function index()
     {
-        parent::check_user_access();
+        if (!parent::check_user_access()) {
+            return response(['result' => [], 'message' => "You are not authorized to perform this request."], 403);
+        }
 
         return response(
         [
@@ -55,7 +57,9 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        parent::check_user_access($user);
+        if (!parent::check_user_access($user)) {
+            return response(['result' => [], 'message' => "You are not authorized to perform this request."], 403);
+        }
 
         return response(
         [
