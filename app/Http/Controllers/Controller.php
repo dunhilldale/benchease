@@ -38,14 +38,13 @@ class Controller extends BaseController
                 ) 
             {
                 return false;
-                // return response(['result' => [], 'message' => "You are not authorized to perform this request."], 403);
             }
 
         } else {
             if ($user->type !== User::TYPE_ADMIN) {
                 return false;
-                // return response(['result' => [], 'message' => "You are not authorized to perform this request."], 403);
             }
+            return true;
         }
 
     }

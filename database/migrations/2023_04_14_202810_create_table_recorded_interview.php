@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('recorded_interview', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('user_id')->nullable();
-            $table->string('title');
-            $table->string('link');
+            $table->string('client');
+            $table->string('job_post');
+            $table->string('link')->nullable();;
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->timestamps();

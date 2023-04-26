@@ -11,16 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shift_days', function (Blueprint $table) {
-            $table->id();
+        Schema::create('shift_hours', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->uuid('user_id')->nullable();
-            $table->string('days');
+            // $table->uuid('shift_days_id')->nullable();
+            // $table->timestamp('shift_start', $precision = 0)->default(now());
+            // $table->timestamp('shift_end', $precision = 0)->default(now());
+            $table->string('shift_start');
+            $table->string('shift_end');
 
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->timestamps();
            
             $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('shift_days_id')->references('id')->on('shift_days');
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
         });
@@ -31,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shift_days');
+        Schema::dropIfExists('shift_hours');
     }
 };

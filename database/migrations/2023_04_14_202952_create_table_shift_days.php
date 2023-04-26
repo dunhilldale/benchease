@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shift_hours', function (Blueprint $table) {
-            $table->id();
+        Schema::create('shift_days', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->uuid('user_id')->nullable();
-            $table->timestamp('shift_start', $precision = 0)->default(now());
-            $table->timestamp('shift_end', $precision = 0)->default(now());
+            $table->string('short_name');
+            $table->string('days');
 
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shift_hours');
+        Schema::dropIfExists('shift_days');
     }
 };

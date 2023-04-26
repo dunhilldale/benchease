@@ -12,11 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('work_environment', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('user_id')->nullable();
-            $table->string('title');
-            $table->timestamps();
+            $table->enum('name', ['onsite', 'wfh', 'hybrid']);
+            $table->uuid('created_by')->nullable();
+            $table->uuid('updated_by')->nullable();
 
+            $table->timestamps();
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

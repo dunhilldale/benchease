@@ -12,18 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('project_history', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('user_id')->nullable();
             $table->string('project_name');
             $table->string('client_name');
             $table->text('description');
             $table->date('start_date');
-            $table->date('end_date');   
+            $table->date('end_date');
 
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->timestamps();
-           
+
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
