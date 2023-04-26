@@ -16,6 +16,6 @@ class Skills extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'id', 'title', 'created_by', 'updated_by'
+        'id', 'title', 'approved', 'created_by', 'updated_by'
     ];
 }
