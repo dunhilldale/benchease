@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
+            $table->boolean('approved')->default(false);
 
             $table->timestamps();
             $table->foreign('created_by')->references('id')->on('users');
