@@ -14,7 +14,7 @@
                                 $count = 1;
                             @endphp
                             @foreach ($users as $user)
-                                <button onclick="show_user_clients('{{ $user->id }}')" class="list-group-item list-group-item-action" >{{ $count++; }}. {{ $user->first_name . ' ' . $user->last_name }}</button>
+                                <button onclick="show_user_clients('{{ $user->id }}')" class="list-group-item list-group-item-action" >{{ $count++ }}. {{ $user->first_name . ' ' . $user->last_name }}</button>
                             @endforeach
                         </div>
 
