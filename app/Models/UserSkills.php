@@ -9,6 +9,7 @@ use App\Traits\UUID;
 class UserSkills extends Model
 {
     use UUID, HasFactory;
+    protected $keyType = 'string';
 
     /**
      * The attributes that are mass assignable.
@@ -18,4 +19,17 @@ class UserSkills extends Model
     protected $fillable = [
         'user_id', 'skill_id', 'category',
     ];
+
+	// ================================= Relation =====================================
+
+    public function user()
+    {
+    	return $this->belongsTo(User::class, 'user_id', 'id', );
+    }
+
+    public function skill()
+    {
+    	return $this->belongsTo(Skill::class, 'skill_id', 'id', );
+    }
+
 }

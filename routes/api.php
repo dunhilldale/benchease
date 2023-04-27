@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\SkillsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +30,9 @@ Route::prefix('test')->group(function(){
 Route::prefix('v1')->group(function(){
     Route::post('auth/token', [AuthController::class, 'authenticate']);
     Route::post('auth/refresh', [AuthController::class, 'refreshToken']);
-    // Route::post('users/register', [UserController::class, 'create']); //->name('user.create')
     Route::resource('users', UserController::class);
+    Route::resource('skills', SkillsController::class);
+    Route::post('skills/{skill}/approve', [SkillsController::class, 'approve'])->name('skills.approve');
 });
 
 // Route::middleware('auth:api')->prefix('v2')->group(function(){});

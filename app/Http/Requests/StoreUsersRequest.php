@@ -3,10 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Validator;
 use Illuminate\Validation\Rules;
-use App\Models\User;
 
 class StoreUsersRequest extends FormRequest
 {
