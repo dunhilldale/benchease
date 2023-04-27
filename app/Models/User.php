@@ -99,8 +99,8 @@ class User extends Authenticatable
     protected function middleName(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => ucfirst($value),
-            set: fn (string $value) => strtolower($value),
+            get: fn (?string $value) => ucfirst($value),
+            set: fn (?string $value) => strtolower($value),
         );
     }
     protected function lastName(): Attribute
