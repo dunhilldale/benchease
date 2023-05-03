@@ -42,6 +42,10 @@ return new class extends Migration
         Skills::create([ 'title' => 'git', 'created_by' => $admin->id, 'approved' => true ]);
         Skills::create([ 'title' => 'jira', 'created_by' => $admin->id, 'approved' => true ]);
         Skills::create([ 'title' => 'trello', 'created_by' => $admin->id, 'approved' => true ]);
+        Skills::create([ 'title' => '.net', 'created_by' => $admin->id, 'approved' => true ]);
+        Skills::create([ 'title' => 'wordpress', 'created_by' => $admin->id, 'approved' => true ]);
+        Skills::create([ 'title' => 'shopify', 'created_by' => $admin->id, 'approved' => true ]);
+        Skills::create([ 'title' => 'webflow', 'created_by' => $admin->id, 'approved' => true ]);
 
     }
 

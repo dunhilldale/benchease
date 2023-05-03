@@ -10,6 +10,7 @@ use App\Models\ProjectHistory;
 use App\Models\RecordedInterview;
 use App\Models\ShiftDays;
 use App\Models\ShiftHours;
+use App\Models\SkillSearches;
 use App\Models\UserJobs;
 use App\Models\UserSkills;
 use App\Models\WorkEnvironment;
@@ -29,5 +30,6 @@ class DatabaseSeeder extends Seeder
         WorkEnvironment::factory(1)->create();
         ShiftDays::factory(1)->create();
         ShiftHours::factory(1)->create();
+        SkillSearches::factory(100)->create();
     }
 }
