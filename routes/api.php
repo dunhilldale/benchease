@@ -33,6 +33,7 @@ Route::prefix('v1')->group(function(){
     Route::resource('users', UserController::class);
     Route::resource('skills', SkillsController::class);
     Route::post('skills/{skill}/approve', [SkillsController::class, 'approve'])->name('skills.approve');
+    Route::post('users/{user}/tagSkills', [UserController::class, 'tagSkills'])->name('skills.tag_skills');
 });
 
 // Route::middleware('auth:api')->prefix('v2')->group(function(){});

@@ -17,9 +17,17 @@ class UserSkills extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id', 'skill_id', 'category',
+        'id', 'user_id', 'skill_id', 'category',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'id' => 'string',
+    ];
 	// ================================= Relation =====================================
 
     public function user()
@@ -29,7 +37,7 @@ class UserSkills extends Model
 
     public function skill()
     {
-    	return $this->belongsTo(Skill::class, 'skill_id', 'id', );
+    	return $this->belongsTo(Skills::class, 'skill_id', 'id', );
     }
 
 }

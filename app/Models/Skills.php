@@ -33,6 +33,10 @@ class Skills extends Model
 
 	// ================================= Relation =====================================
 
+    public function userSkills(){
+        return $this->hasMany(UserSkills::class, 'skill_id');
+    }
+
     public function createdBy()
     {
     	return $this->belongsTo(User::class, 'created_by', 'id', );

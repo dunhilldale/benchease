@@ -56,7 +56,47 @@ class User extends Authenticatable
 
 	// ================================= Relation =====================================
 
+    /**
+     * Not a relationship instance
+     * @return object
+     */
+    public function skills() : object
+    {
+        return DB::table('skills')
+        ->join('user_skills', 'user_skills.skill_id', '=', 'skills.id')
+        ->join('users', 'users.id', '=', 'user_skills.user_id')
+        ->select('skills.title', 'user_skills.category')
+        ->where('users.id', $this->id)
+        ->get();
+    }
 
+    public function userSkills(){
+        return $this->hasMany(UserSkills::class, 'user_id');
+    }
+    
+	// ======================== Accessors and Mutators ================================
+
+    protected function firstName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => ucfirst($value),
+            set: fn (string $value) => strtolower($value),
+        );
+    }
+    protected function middleName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?string $value) => ucfirst($value),
+            set: fn (?string $value) => strtolower($value),
+        );
+    }
+    protected function lastName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => ucfirst($value),
+            set: fn (string $value) => strtolower($value),
+        );
+    }
 
 	// ================================= Methods =====================================
 
@@ -87,27 +127,29 @@ class User extends Authenticatable
         return $this->type === self::TYPE_EMPLOYEE;
     }
 
-	// ======================== Accessors and Mutators ================================
+    public function set_skills(array $skills = [])
+    {
 
-    protected function firstName(): Attribute
-    {
-        return Attribute::make(
-            get: fn (string $value) => ucfirst($value),
-            set: fn (string $value) => strtolower($value),
-        );
     }
-    protected function middleName(): Attribute
+
+    // ================= Befor / After - Active Record Actions ========================
+
+    public static function boot() // or booted()
     {
-        return Attribute::make(
-            get: fn (?string $value) => ucfirst($value),
-            set: fn (?string $value) => strtolower($value),
-        );
-    }
-    protected function lastName(): Attribute
-    {
-        return Attribute::make(
-            get: fn (string $value) => ucfirst($value),
-            set: fn (string $value) => strtolower($value),
-        );
+        // or booted()
+
+        parent::boot();
+
+        self::creating(function($model){ });
+
+        self::created(function($model){ });
+
+        self::updating(function($model){ });
+
+        self::updated(function($model){ });
+
+        self::deleting(function($model){ });
+
+        self::deleted(function($model){ });
     }
 }
