@@ -134,10 +134,8 @@ class User extends Authenticatable
 
     // ================= Befor / After - Active Record Actions ========================
 
-    public static function boot() // or booted()
+    public static function booted() // or booted()
     {
-        // or booted()
-
         parent::boot();
 
         self::creating(function($model){ });
