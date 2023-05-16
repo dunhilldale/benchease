@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['127.0.0.1', '127.0.0.1:8180', 'dunhilldale.com', 'benchease.kierquebral.com', 'brm.kierquebral.com'],
+    'allowed_origins' => ['127.0.0.1', '127.0.0.1:8180', 'dunhilldale.com', '*.kierquebral.com'],
 
     'allowed_origins_patterns' => [],
 
@@ -27,7 +27,7 @@ return [
 
     'exposed_headers' => [],
 
-    'max_age' => 0,
+    'max_age' => 600 ,
 
     'supports_credentials' => false,
 
