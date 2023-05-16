@@ -20,7 +20,7 @@ RUN docker-php-ext-install zip && docker-php-ext-configure intl && docker-php-ex
 
 # Add MySQL and Postgres/pgsql support
 RUN docker-php-ext-install mysqli pdo pdo_mysql mbstring exif pcntl bcmath gd && docker-php-ext-enable pdo_mysql
-RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && docker-php-ext-install pdo_pgsql pgsql
+# RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && docker-php-ext-install pdo_pgsql pgsql
 
 # Get latest Node
 RUN npm install npm@latest -g && \
