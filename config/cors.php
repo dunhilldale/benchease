@@ -15,20 +15,38 @@ return [
     |
     */
 
-    'paths' => ['api/v1/*', 'passport/sanctum/csrf-cookie'],
+    'paths' => [
+        '*',
+        'api/v1/*', 
+        'oauth/*', 
+        'sanctum/csrf-cookie'
+    ],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['127.0.0.1', '127.0.0.1:8180', 'dunhilldale.com', '*.kierquebral.com'],
+    'allowed_origins' => [
+        'http://127.0.0.1:8180', 
+        'http://127.0.0.1:3000', 
+        'https://dunhilldale.com', 
+        'https://brm.kierquebral.com',
+    ],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+    'allowed_headers' => [
+        '*',
+        'X-Requested-With',
+        'Content-Type',
+        'X-Token-Auth',
+        'X-Custom-Header', 
+        'Authorization',
+        'Upgrade-Insecure-Requests', 
+    ],
 
     'exposed_headers' => [],
 
-    'max_age' => 600 ,
+    'max_age' => 86400,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];

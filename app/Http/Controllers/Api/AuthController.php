@@ -11,28 +11,23 @@ use App\Models\Client;
 class AuthController extends Controller
 {
 
-    public function __construct(
-        protected Client $client = new Client()
-    )
-    {
-    }
-
     protected function authenticate(Request $request) : mixed
     {
-        $client = $this->client->get_password_grant_client()->first();
 
-        $request->request->add([
+        $client = Client::get_password_grant_client()->first();
+        $params = [
             'grant_type' => $request->grant_type ?? 'password',
-            'username' => $request->email,
+            'username' => $request->username,
             'password' => $request->password,
             'client_id' => $client->id,
             'client_secret' => $client->secret,
-            'scope' => $request->grant_type ?? null,
-        ]);
+            'scope' => $request->scope ?? null,
+        ];
 
         $proxy = Request::create(
-            'oauth/token',
-            'POST'
+            uri: 'oauth/token',
+            method: 'POST',
+            parameters: $params
         );
 
         return Route::dispatch($proxy);
@@ -40,17 +35,27 @@ class AuthController extends Controller
 
     protected function refreshToken(Request $request) : mixed
     {
-        $request->request->add([
+        $client = Client::get_password_grant_client()->first();
+        // $request->request->add([
+        //     'grant_type' => $request->grant_type ?? 'refresh_token',
+        //     'refresh_token' => $request->refresh_token,
+        //     'client_id' => $client->id,
+        //     'client_secret' => $client->secret,
+        //     'scope' => ''
+        // ]);
+        
+        $params = [
             'grant_type' => $request->grant_type ?? 'refresh_token',
             'refresh_token' => $request->refresh_token,
-            'client_id' => $this->client->id,
-            'client_secret' => $this->client->secret,
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
             'scope' => ''
-        ]);
+        ];
 
         $proxy = Request::create(
-            'oauth/token',
-            'POST'
+            uri: 'oauth/token/refresh',
+            method: 'POST',
+            parameters: $params
         );
 
         return Route::dispatch($proxy);

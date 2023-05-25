@@ -12,12 +12,14 @@ class Client extends Model
 {
     use HasApiTokens, HasFactory;
 
-    public function get_personal_access_client()
+    public static function get_personal_access_client()
     {
         return DB::table('oauth_clients')->where('name', Env::get('APP_NAME').' Personal Access Client')->get();
+        // return DB::table('oauth_clients')->where('name', 'Bench Ease Personal Access Client')->get();
     }
-    public function get_password_grant_client()
+    public static function get_password_grant_client()
     {
         return DB::table('oauth_clients')->where('name', Env::get('APP_NAME').' Password Grant Client')->get();
+        // return DB::table('oauth_clients')->where('name', 'Bench Ease Password Grant Client')->get();
     }
 }

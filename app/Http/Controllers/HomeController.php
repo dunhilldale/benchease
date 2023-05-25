@@ -15,8 +15,7 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct(
-        public User $users,
-        protected Client $client = new Client()
+        public User $users
     )
     {
         $this->users = new User();
@@ -32,8 +31,8 @@ class HomeController extends Controller
     {
         if (Auth::user()->type === User::TYPE_ADMIN) {
             $grants = [
-                'personal_access' => $this->client->get_personal_access_client()->first(),
-                'password_grant' => $this->client->get_password_grant_client()->first(),
+                'personal_access' => Client::get_personal_access_client()->first(),
+                'password_grant' => Client::get_password_grant_client()->first(),
             ];              
             return view('home', compact('grants'));
         }
