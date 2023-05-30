@@ -16,11 +16,11 @@ class HandleCors extends BaseCors
     {
         // dd('Interrupted!');
         return $next($request)
-        ->header('Access-Control-Allow-Origin', '*')
-        ->header('Access-Control-Allow-Methods', '*')
-        ->header('Access-Control-Allow-Credentials', true)
-        ->header('Access-Control-Max-Age', 86400)
-        ->header('Access-Control-Allow-Headers', '*');
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', '*')
+            ->header('Access-Control-Allow-Credentials', true)
+            ->header('Access-Control-Max-Age', 86400)
+            ->header('Access-Control-Allow-Headers', '*');
         // ->header('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,X-Token-Auth,Authorization');
 
     }

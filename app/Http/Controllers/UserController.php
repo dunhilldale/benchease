@@ -30,10 +30,12 @@ class UserController extends Controller
         }
 
         return response(
-        [
-            'result' => UsersResource::collection(User::all()), 
-            'message' => 'Successful'
-        ], 200);
+            [
+                'result' => UsersResource::collection(User::all()),
+                'message' => 'Successful'
+            ],
+            200
+        );
     }
 
     public function store(StoreUsersRequest $request)
@@ -54,7 +56,6 @@ class UserController extends Controller
         );
 
         return Route::dispatch($token);
-        
     }
 
     public function show(User $user)
@@ -64,10 +65,12 @@ class UserController extends Controller
         }
 
         return response(
-        [
-            'result' => new UsersResource($user), 
-            'message' => 'Successful'
-        ], 200);
+            [
+                'result' => new UsersResource($user),
+                'message' => 'Successful'
+            ],
+            200
+        );
         // return new UsersResource($user);
     }
 
@@ -100,17 +103,18 @@ class UserController extends Controller
         foreach ($skills as $key => $value) {
             $user_skill = UserSkills::create([
                 'user_id' => $user->id,
-                'skill_id' => $key, 
+                'skill_id' => $key,
                 'category' => $value
             ]);
             array_push($user_skills, $user_skill);
         }
 
         return response(
-            [ 
-                'result' => $user->skills(), 
+            [
+                'result' => $user->skills(),
                 'message' => 'Successful'
-            ], 200);
-
+            ],
+            200
+        );
     }
 }

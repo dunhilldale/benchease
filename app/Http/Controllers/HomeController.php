@@ -16,8 +16,7 @@ class HomeController extends Controller
      */
     public function __construct(
         public User $users
-    )
-    {
+    ) {
         $this->users = new User();
         $this->middleware(['auth', 'verified']);
     }
@@ -33,7 +32,7 @@ class HomeController extends Controller
             $grants = [
                 'personal_access' => Client::get_personal_access_client()->first(),
                 'password_grant' => Client::get_password_grant_client()->first(),
-            ];              
+            ];
             return view('home', compact('grants'));
         }
 
@@ -48,7 +47,7 @@ class HomeController extends Controller
 
     public function users(Request $request)
     {
-        $users = $this->users->get_users( type: 'employee', status: true );
+        $users = $this->users->get_users(type: 'employee', status: true);
         return view('users', compact('users'));
     }
 

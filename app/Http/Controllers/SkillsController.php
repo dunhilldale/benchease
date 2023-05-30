@@ -22,10 +22,12 @@ class SkillsController extends Controller
     public function index()
     {
         return response(
-        [
-            'result' => SkillsResource::collection(Skills::all()),
-            'message' => 'Successful'
-        ], 200);
+            [
+                'result' => SkillsResource::collection(Skills::all()),
+                'message' => 'Successful'
+            ],
+            200
+        );
     }
 
     /**
@@ -34,17 +36,19 @@ class SkillsController extends Controller
     public function store(StroreSkillsRequest $request)
     {
         $request->merge(array('created_by' => Auth::user()->id));
-        if ( Auth::user()->type === User::TYPE_ADMIN || Auth::user()->type === User::TYPE_HR) {
+        if (Auth::user()->type === User::TYPE_ADMIN || Auth::user()->type === User::TYPE_HR) {
             $request->merge(array('approved' => true));
         }
 
         $skill = Skills::create($request->all());
 
         return response(
-        [
-            'result' => new SkillsResource($skill), 
-            'message' => 'Successful'
-        ], 200);
+            [
+                'result' => new SkillsResource($skill),
+                'message' => 'Successful'
+            ],
+            200
+        );
     }
 
     /**
@@ -53,10 +57,12 @@ class SkillsController extends Controller
     public function show(Skills $skill)
     {
         return response(
-        [
-            'result' => new SkillsResource($skill), 
-            'message' => 'Successful'
-        ], 200);
+            [
+                'result' => new SkillsResource($skill),
+                'message' => 'Successful'
+            ],
+            200
+        );
     }
 
     /**
@@ -77,24 +83,25 @@ class SkillsController extends Controller
 
     public function approve(Request $request, Skills $skill)
     {
-        if ( Auth::user()->type === User::TYPE_ADMIN || Auth::user()->type === User::TYPE_HR) {
+        if (Auth::user()->type === User::TYPE_ADMIN || Auth::user()->type === User::TYPE_HR) {
             if ($skill->approved) {
                 $skill->approved = false;
-            }else{
+            } else {
                 $skill->approved = true;
             }
-            
+
             $skill->updated_by = auth()->user()->id;
             $skill->update();
 
             return response(
-            [
-                'result' => new SkillsResource($skill), 
-                'message' => 'Skill has been updated! '
-            ], 200);
+                [
+                    'result' => new SkillsResource($skill),
+                    'message' => 'Skill has been updated! '
+                ],
+                200
+            );
         }
 
         return response(['result' => [], 'message' => "You are not authorized to perform this request."], 403);
-
     }
 }

@@ -11,7 +11,7 @@ use App\Models\Client;
 class AuthController extends Controller
 {
 
-    protected function authenticate(Request $request) : mixed
+    protected function authenticate(Request $request): mixed
     {
 
         $client = Client::get_password_grant_client()->first();
@@ -33,7 +33,7 @@ class AuthController extends Controller
         return Route::dispatch($proxy);
     }
 
-    protected function refreshToken(Request $request) : mixed
+    protected function refreshToken(Request $request): mixed
     {
         $client = Client::get_password_grant_client()->first();
         // $request->request->add([
@@ -43,7 +43,7 @@ class AuthController extends Controller
         //     'client_secret' => $client->secret,
         //     'scope' => ''
         // ]);
-        
+
         $params = [
             'grant_type' => $request->grant_type ?? 'refresh_token',
             'refresh_token' => $request->refresh_token,

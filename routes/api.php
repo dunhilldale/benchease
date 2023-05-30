@@ -21,13 +21,13 @@ use App\Http\Controllers\SkillsController;
 //     return $request->user();
 // });
 
-Route::prefix('test')->group(function(){
-    Route::get('/test1', function(Request $request){
+Route::prefix('test')->group(function () {
+    Route::get('/test1', function (Request $request) {
         return 'You have reach this API endpoint';
     });
 });
 
-Route::prefix('v1')->group(function(){
+Route::prefix('v1')->group(function () {
     Route::post('auth/token', [AuthController::class, 'authenticate']);
     Route::post('auth/refresh', [AuthController::class, 'refreshToken']);
     Route::resource('users', UserController::class);
