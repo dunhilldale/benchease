@@ -54,27 +54,28 @@ class User extends Authenticatable
         'is_new' => 'boolean',
     ];
 
-	// ================================= Relation =====================================
+    // ================================= Relation =====================================
 
     /**
      * Not a relationship instance
      * @return object
      */
-    public function skills() : object
+    public function skills(): object
     {
         return DB::table('skills')
-        ->join('user_skills', 'user_skills.skill_id', '=', 'skills.id')
-        ->join('users', 'users.id', '=', 'user_skills.user_id')
-        ->select('skills.title', 'user_skills.category')
-        ->where('users.id', $this->id)
-        ->get();
+            ->join('user_skills', 'user_skills.skill_id', '=', 'skills.id')
+            ->join('users', 'users.id', '=', 'user_skills.user_id')
+            ->select('skills.title', 'user_skills.category')
+            ->where('users.id', $this->id)
+            ->get();
     }
 
-    public function userSkills(){
+    public function userSkills()
+    {
         return $this->hasMany(UserSkills::class, 'user_id');
     }
-    
-	// ======================== Accessors and Mutators ================================
+
+    // ======================== Accessors and Mutators ================================
 
     protected function firstName(): Attribute
     {
@@ -98,9 +99,9 @@ class User extends Authenticatable
         );
     }
 
-	// ================================= Methods =====================================
+    // ================================= Methods =====================================
 
-    public static function get(?string $id) : ?User
+    public static function get(?string $id): ?User
     {
         $user = User::where('id', $id)->firstOrFail();
         return $id ? $user : null;
@@ -109,27 +110,26 @@ class User extends Authenticatable
     public function get_users(?string $type = null, ?bool $status = null)
     {
         return $this->orderBy('last_name', 'asc')
-                    ->where('type', $type)
-                    ->where('status', $status)
-                    ->get();
+            ->where('type', $type)
+            ->where('status', $status)
+            ->get();
     }
-    
-    public function is_admin() : bool
+
+    public function is_admin(): bool
     {
         return $this->type === self::TYPE_ADMIN;
     }
-    public function is_hr() : bool
+    public function is_hr(): bool
     {
         return $this->type === self::TYPE_HR;
     }
-    public function is_employee() : bool
+    public function is_employee(): bool
     {
         return $this->type === self::TYPE_EMPLOYEE;
     }
 
     public function set_skills(array $skills = [])
     {
-
     }
 
     // ================= Befor / After - Active Record Actions ========================
@@ -138,16 +138,22 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        self::creating(function($model){ });
+        self::creating(function ($model) {
+        });
 
-        self::created(function($model){ });
+        self::created(function ($model) {
+        });
 
-        self::updating(function($model){ });
+        self::updating(function ($model) {
+        });
 
-        self::updated(function($model){ });
+        self::updated(function ($model) {
+        });
 
-        self::deleting(function($model){ });
+        self::deleting(function ($model) {
+        });
 
-        self::deleted(function($model){ });
+        self::deleted(function ($model) {
+        });
     }
 }
